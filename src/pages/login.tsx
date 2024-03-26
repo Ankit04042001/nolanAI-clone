@@ -35,7 +35,7 @@ const Login = () => {
             }
             ))
         }
-    }, [session, userInfo.userInfo])
+    }, [session, userInfo])
 
     return (
         <div className="w-full min-h-screen relative">
