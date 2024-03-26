@@ -17,7 +17,6 @@ const BottomHeader = ({ script, profile }: Props) => {
     const handleSignOut = () => {
         signOut();
         dispatch(removeUser())
-        router.push('/')
     }
 
 

@@ -45,12 +45,13 @@ export function Loading() {
 }
 
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, 
+  pageProps:{ session, ...pageProps} }: AppProps) {
   return (
     <div className={lexendDeca.className}>
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
-          <SessionProvider>
+          <SessionProvider session={session}>
             <RootLayout>
               <Loading />
               <Component {...pageProps} />

@@ -10,30 +10,27 @@ import { useRouter } from "next/router";
 
 const Login = () => {
     const router = useRouter()
-    const { data: session } = useSession()
+    const  session  = useSession()
     const userInfo = useSelector((state: StateProps) => state.next)
     const dispatch = useDispatch()
 
 
     const handleSignIn = async() => {
-        console.log('it is')
-        await signIn();
-        console.log('working')
-        router.push('/')
+        signIn();
         
     }
 
 
 
     useEffect(() => {
-        if (userInfo.userInfo) {
+        if (session.status === 'authenticated') {
             router.push('/')
         }
-        if (session) {
+        if (session.data) {
             dispatch(addUser({
-                name: session?.user?.name,
-                email: session?.user?.email,
-                image: session?.user?.image
+                name: session.data?.user?.name,
+                email: session.data?.user?.email,
+                image: session.data?.user?.image
             }
             ))
         }
