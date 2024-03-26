@@ -24,9 +24,6 @@ const Login = () => {
 
 
     useEffect(() => {
-        if (userInfo.userInfo) {
-            router.push('/')
-        }
         if (session) {
             dispatch(addUser({
                 name: session?.user?.name,
@@ -35,7 +32,7 @@ const Login = () => {
             }
             ))
         }
-    }, [session, userInfo])
+    }, [session])
 
     return (
         <div className="w-full min-h-screen relative">
