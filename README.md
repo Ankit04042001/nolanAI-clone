@@ -1,4 +1,4 @@
-This is a nextjs project integrated with gemini api and using oAuth with google provider for authentication. LocalStorage has been used to store the data. No serverside code and database has been used  for this project.
+This is a nextjs project integrated with gemini api and using oAuth with google provider for authentication. LocalStorage has been used to store the data.
 
 
 ## Setup in local environment
