@@ -15,8 +15,8 @@ const Login = () => {
     const dispatch = useDispatch()
 
 
-    const handleSignIn = () => {
-        signIn();
+    const handleSignIn = async() => {
+        await signIn();
         router.push('/')
         
     }
@@ -24,6 +24,9 @@ const Login = () => {
 
 
     useEffect(() => {
+        if (userInfo.userInfo) {
+            router.push('/')
+        }
         if (session) {
             dispatch(addUser({
                 name: session?.user?.name,
