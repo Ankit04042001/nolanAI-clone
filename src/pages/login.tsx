@@ -19,6 +19,7 @@ const Login = () => {
 
     const handleSignIn = () => {
         signIn();
+        router.push('/')
     }
 
 
