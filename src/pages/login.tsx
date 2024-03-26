@@ -1,8 +1,6 @@
 import Image from "next/image";
 import hero from '@/images/loginHero.webp';
 import googleLogo from '@/images/googleLogo.png';
-import { FaFacebook } from "react-icons/fa";
-import { MdOutlineEmail } from "react-icons/md";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +18,7 @@ const Login = () => {
     const handleSignIn = () => {
         signIn();
         router.push('/')
+        
     }
 
 
@@ -36,7 +35,7 @@ const Login = () => {
             }
             ))
         }
-    }, [session])
+    }, [session, userInfo.userInfo])
 
     return (
         <div className="w-full min-h-screen relative">
