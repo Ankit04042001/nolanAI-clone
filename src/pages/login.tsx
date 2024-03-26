@@ -16,7 +16,9 @@ const Login = () => {
 
 
     const handleSignIn = async() => {
+        console.log('it is')
         await signIn();
+        console.log('working')
         router.push('/')
         
     }
