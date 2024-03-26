@@ -41,7 +41,7 @@ const Scripts = () => {
                     </thead>
                     <tbody>
                         {
-                            scriptData.map((item: scriptProps) => {
+                            scriptData?.map((item: scriptProps) => {
                                 return <tr key={item.id} className='border border-[1px] border-[#000]'>
                                     <td className='p-2 border border-[1px] border-[#000] text-[#1d6ee3] truncate'><Link href={'/scripts/' + item.id}>{item.id}</Link></td>
                                     <td className='p-2 border border-[1px] border-[#000]'>{item.title}</td>

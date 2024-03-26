@@ -7,10 +7,10 @@ import { signIn } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
 import { TbArrowBadgeRightFilled } from "react-icons/tb";
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import ComponentLoading from "./Loading";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const Header = () => {
   const [hideMenu, setHideMenu] = useState(true)
@@ -46,18 +46,17 @@ const Header = () => {
   }
 
   const fetchData = async () => {
-    let prompt;
-    if (selectedFeatureType === 'featureFilm') {
-      prompt = `Write a feature Script for title: ${featureFilmTitle}, genre: ${genre} with synopsis ${synopsis}`;
-    } else {
-      prompt = `Write a Short Video Script for title: ${videoScriptTitle}, about: ${videoScriptAbout} for platform: ${platform}`;
-    }
-    const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_API_KEY!)
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-    const result = await model.generateContent(prompt);
-    const response = result.response.text()
-    return response;
+    
+    const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/gemini`,
+      {
+        selectedFeatureType: selectedFeatureType,
+        featureFilmTitle : featureFilmTitle,
+        genre : genre,
+        synopsis: synopsis
+      }
+      )
+      return result.data.text;
   }
 
   const handleFeatureSubmit = async (e: FormEvent) => {
@@ -104,7 +103,7 @@ const Header = () => {
     data.push({
       id: scriptId,
       scriptType: 'Video Short',
-      title: featureFilmTitle,
+      title: videoScriptTitle,
       about: videoScriptAbout,
       platform: platform,
       script: result
@@ -265,7 +264,7 @@ const Header = () => {
                   </div>
                 </button>
                   ):(
-                    <button onClick={()=>signIn()} className="ml-2 px-4 py-2 text-[#f5f2f0] bg-[#1d6ee3] hover:bg-[#1d6ee3] font-bold rounded-3xl">Login First</button>
+                    <Link onClick={()=>setIsActiveModal(false)} href='/login' className="ml-2 px-4 py-2 text-[#f5f2f0] bg-[#1d6ee3] hover:bg-[#1d6ee3] font-bold rounded-3xl">Login First</Link>
                   )
                 }
               </div>
@@ -314,7 +313,7 @@ const Header = () => {
                         </div>
                       </button>
                     ) : (
-                      <button type="button" onClick={()=>{signIn()}} className="ml-2 px-4 py-2 text-[#f5f2f0] bg-[#1d6ee3] hover:bg-[#1d6ee3] font-bold rounded-3xl">Login First</button>                    
+                      <Link onClick={()=>setIsActiveModal(false)} href='/login' className="ml-2 px-4 py-2 text-[#f5f2f0] bg-[#1d6ee3] hover:bg-[#1d6ee3] font-bold rounded-3xl">Login First</Link>                    
                     )
                   }
                 </div>
